@@ -1,0 +1,125 @@
+set $mod Mod1
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term kitty
+
+set $wallpaper_dir $HOME/Pictures/Wallpapers
+set $set_wallpaper \
+		wallpaper=$(find $wallpaper_dir -type f | shuf -n 1) && \
+		wal -qni "${wallpaper}" && \
+		swaymsg output "*" background "${wallpaper}" fill
+
+bindsym $mod+Shift+r exec $set_wallpaper
+exec $set_wallpaper
+
+include ~/.cache/wal/colors-sway
+output * bg $wallpaper fill
+
+#class					border		background	text		indicator	child_border
+client.focused          $color14	$background	$foreground	$color7 	$foreground
+client.focused_inactive $color3		$background	$foreground	$color8 	$color8
+client.unfocused        $color1     $background	$foreground	$color2 	$color2
+client.urgent           $color5     $background	$foreground	$color13 	$color6
+
+set $menu wofi --show drun | xargs swaymsg exec --
+
+font Hack 14px
+default_border pixel 2
+titlebar_border_thickness 2
+gaps outer 4
+gaps inner 4
+
+
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+Space exec $menu
+
+
+floating_modifier $mod normal
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+right move right
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+e layout splith
+bindsym $mod+q layout splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+d floating toggle
+bindsym $mod+d focus mode_toggle
+bindsym $mod+a focus parent
+
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+mode "resize" {
+
+	bindsym $left resize shrink width 10px
+	bindsym $down resize grow height 10px
+	bindsym $up resize shrink height 10px
+	bindsym $right resize grow width 10px
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bar {
+    swaybar_command waybar
+}
+input * {
+    xkb_layout "us"
+	#xkb_variant "intl"
+}
+
+input type:pointer {
+    accel_profile "flat"
+	pointer_accel 0
+}
+include /etc/sway/config.d/*

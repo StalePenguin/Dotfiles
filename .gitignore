@@ -1,0 +1,27 @@
+* # Ignore everything 
+
+# Except
+
+!/
+/*
+!/.gitignore
+
+!.config
+.config/*
+
+!.config/sway
+!.config/sway/*
+
+!.config/waybar
+!.config/waybar/*
+
+!.config/fish
+!.config/fish/*
+
+!.config/nvim
+!.config/nvim/*
+
+!.config/gtk-3.0
+!.config/gtk-3.0/*
+
+

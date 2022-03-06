@@ -1,0 +1,78 @@
+@import "../../.cache/wal/colors-waybar.css";
+* {
+		border: none;
+		font-family: Iosevka Nerd Font;
+		font-size: 13px;
+		color: @foreground;
+}
+window#waybar {
+		background-color: @background;
+		border-bottom: 3px solid @color1;
+		transition-property: background-color;
+		transition-duration: .5s;
+}
+
+window#waybar.hidden {
+		opacity: 0.2;
+}
+
+#window {
+		font-weight: bold;
+}
+
+#workspaces,
+#cpu,
+#memory,
+#custom-media,
+#clock,
+#idle_inhibitor,
+#pulseaudio,
+#network,
+#tray {
+		background-color: @color1;
+		padding: 0 10px;
+		margin: 2px;
+		border: 3px solid rgba(0, 0, 0, 0);
+		border-radius: 90px;
+		background-clip: padding-box; 
+}
+#workspaces button {
+		padding: 0 5px;
+		min-width: 20px;
+		color: @color8;
+}
+
+#workspaces button:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+}
+
+#workspaces button.urgent {
+		color: @color14;
+}
+
+#clock {
+		background-color: @color1;
+}
+#memory {
+		background-color: @color2;
+}
+#cpu {
+		background-color: @color3;
+}
+#network {
+		background-color: @color4;
+}
+#pulseaudio {
+		background-color: @color5;
+}
+
+@keyframes blink {
+		to {
+				background-color: @color6;
+				color: #e06c75;
+		}
+}
+#network.disconnected {
+		background-color: #e06c75;
+		color: @color6;
+}
