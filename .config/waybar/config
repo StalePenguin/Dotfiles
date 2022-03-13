@@ -3,7 +3,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "custom/media"], 
     "modules-center": ["sway/window"],
-    "modules-right": ["tray", "pulseaudio", "network", "cpu", "memory", "clock"],
+    "modules-right": ["tray", "pulseaudio", "network", "cpu", "memory", "custom/clock"],
     "sway/workspaces": {
          "disable-scroll": true,
          "all-outputs": true,
@@ -23,11 +23,6 @@
     },
     "tray": {
         "spacing": 10
-    },
-    "clock": {
-        "timezone": "Europe/Amsterdam",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
         "format": "{usage}% ",
@@ -74,6 +69,9 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
 	"on-click": "playerctl play-pause"
     },
-
+    "custom/clock": {
+    	"exec": "date +'%A %B %d - %H:%M'",
+	"interval": 45
+    }
 }
 

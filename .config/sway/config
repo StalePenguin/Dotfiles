@@ -4,7 +4,6 @@ set $left h
 set $down j
 set $up k
 set $right l
-
 set $term kitty
 
 set $wallpaper_dir $HOME/Pictures/Wallpapers
@@ -97,6 +96,18 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
+
+set $screenshot_dir $HOME/Pictures/Screenshots
+set $screenshot_path "$screenshot_dir/Screenshot from $(date +"%B %d %Y at %H:%M:%S") - $(swaymsg -t get_tree | jq -r '..|try select(.focused == true).app_id').png"
+
+set $screenshot grim $screenshot_path && mpg123 $HOME/.config/sway/screenshot.mp3
+set $area_screenshot grim -g "$(slurp)" $screenshot_path && mpg123 $HOME/.config/sway/screenshot.mp3
+
+
+bindsym Print exec $screenshot
+bindsym Shift+Print exec $area_screenshot
+
+
 mode "resize" {
 
 	bindsym $left resize shrink width 10px
@@ -115,7 +126,6 @@ bar {
 }
 input * {
     xkb_layout "us"
-	#xkb_variant "intl"
 }
 
 input type:pointer {
