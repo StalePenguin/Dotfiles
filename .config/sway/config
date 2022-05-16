@@ -4,7 +4,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term kitty
+set $term alacritty
 
 set $wallpaper_dir $HOME/Pictures/Wallpapers
 set $set_wallpaper \
@@ -39,7 +39,7 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
-bindsym $mod+Space exec $menu
+bindsym Super_L exec $menu
 
 
 floating_modifier $mod normal
