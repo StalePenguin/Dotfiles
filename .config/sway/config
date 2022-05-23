@@ -14,6 +14,7 @@ set $set_wallpaper \
 
 bindsym $mod+Shift+r exec $set_wallpaper
 exec $set_wallpaper
+exec mako
 
 include ~/.cache/wal/colors-sway
 output * bg $wallpaper fill
@@ -21,10 +22,10 @@ output * bg $wallpaper fill
 #class					border		background	text		indicator	child_border
 client.focused          $color14	$background	$foreground	$color7 	$foreground
 client.focused_inactive $color3		$background	$foreground	$color8 	$color8
-client.unfocused        $color1     $background	$foreground	$color2 	$color2
-client.urgent           $color5     $background	$foreground	$color13 	$color6
+client.unfocused        $color1         $background	$foreground	$color2 	$color2
+client.urgent           $color5         $background	$foreground	$color13 	$color6
 
-set $menu wofi --show drun | xargs swaymsg exec --
+set $menu killall -q wofi || wofi --show drun -I | xargs swaymsg exec --
 
 font Hack 14px
 default_border pixel 2
@@ -33,9 +34,12 @@ gaps outer 4
 gaps inner 4
 
 
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec wob
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1| awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
