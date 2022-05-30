@@ -101,16 +101,18 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 
-set $screenshot_dir $HOME/Pictures/Screenshots
-set $screenshot_path "$screenshot_dir/Screenshot from $(date +"%B %d %Y at %H:%M:%S") - $(swaymsg -t get_tree | jq -r '..|try select(.focused == true).app_id').png"
+set $screenshot_dir $HOME/Pictures/Screenshots/
+set $screenshot_path \
+	$screenshot_dir/$(date +'%B %d %Y at %H:%M:%S') - $(swaymsg -t get_tree | jq -r '..|try select(.focused == true).app_id').png
 
-set $screenshot grim $screenshot_path && mpg123 $HOME/.config/sway/screenshot.mp3
-set $area_screenshot grim -g "$(slurp)" $screenshot_path && mpg123 $HOME/.config/sway/screenshot.mp3
+set $upload \
+	curl -F"file=@$screenshot_path" https://0x0.st | wl-copy
 
+set $sfx_path \
+	$HOME/.config/sway/screenshot.mp3
 
-bindsym Print exec $screenshot
-bindsym Shift+Print exec $area_screenshot
-
+bindsym Print exec grim -g "$(slurp)" "$screenshot_path" && mpg123 $sfx_path
+bindsym Shift+Print exec grim -g "$(slurp)" "$screenshot_path" && $upload && mpg123 $sfx_path
 
 mode "resize" {
 
