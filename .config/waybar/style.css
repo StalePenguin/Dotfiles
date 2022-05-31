@@ -23,6 +23,7 @@ window#waybar.hidden {
 #workspaces,
 #cpu,
 #memory,
+#battery,
 #custom-media,
 #custom-clock,
 #idle_inhibitor,
