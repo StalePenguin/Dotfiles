@@ -18,6 +18,7 @@
 	margin: 5px;
 	border: 1px solid @color4;
 	color: @color7;
+	background-color: @background;
 }
 
 

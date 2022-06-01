@@ -14,6 +14,9 @@
              "default": ""
          }
     }, 
+    "sway/window": {
+    	"max-length": 40
+    },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {

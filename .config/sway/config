@@ -125,7 +125,7 @@ set $sfx_path \
 	$HOME/.config/sway/screenshot.mp3
 
 bindsym Print exec grim -g "$(slurp)" "$screenshot_path" && mpg123 $sfx_path
-bindsym Shift+Print exec grim -g "$(slurp)" "$screenshot_path" && $upload && mpg123 $sfx_path
+bindsym Shift+Print exec grim -g "$(slurp)" "$screenshot_path" && $upload
 
 mode "resize" {
 
