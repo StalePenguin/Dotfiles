@@ -1,4 +1,4 @@
-@import "/home/anon/.cache/wal/colors-waybar.css";
+@import ".cache/wal/colors-waybar.css";
 
 * {
 	#background-color: @background;

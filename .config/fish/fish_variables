@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export GTK_THEME:Nordic\x2ddarker
+SETUVAR --export GTK_THEME:Orchis\x2dDark
 SETUVAR --export MOZ_ENABLE_WAYLAND:1
 SETUVAR --export QT_QPA_PLATFORM:wayland
 SETUVAR __fish_initialized:3400

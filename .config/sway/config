@@ -10,11 +10,14 @@ set $wallpaper_dir $HOME/Pictures/Wallpapers
 set $set_wallpaper \
 		wallpaper=$(find $wallpaper_dir -type f | shuf -n 1) && \
 		wal -qni "${wallpaper}" && \
-		swaymsg output "*" background "${wallpaper}" fill
+		swaymsg output "*" background "${wallpaper}" fill && \
+		color=$(sed -n 's/^#//;12p' ~/.cache/wal/colors) && \
+		liquidctl -m "NZXT" set led color fixed $color 
 
 bindsym $mod+Shift+r exec $set_wallpaper
 exec $set_wallpaper
 exec mako
+exec_always autotiling
 
 include ~/.cache/wal/colors-sway
 output * bg $wallpaper fill
@@ -125,7 +128,7 @@ set $sfx_path \
 	$HOME/.config/sway/screenshot.mp3
 
 bindsym Print exec grim -g "$(slurp)" "$screenshot_path" && mpg123 $sfx_path
-bindsym Shift+Print exec grim -g "$(slurp)" "$screenshot_path" && $upload
+bindsym Shift+Print exec grim -g "$(slurp)" "$screenshot_path" && $upload 
 
 mode "resize" {
 
